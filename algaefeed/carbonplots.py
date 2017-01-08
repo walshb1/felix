@@ -240,7 +240,7 @@ for i in range(len(nScen_temp)):
 plt.xlim(1900,2150)
 if label_HD == True:
     annotate('Sources: Met Office Hadley Center', fontsize=hd_sz, xy=(2150, -0.55), xycoords='data', 
-             horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+             ha='right',va='center', annotation_clip=False)
 
 xticks = ax.xaxis.get_major_ticks()
 xticks[-1].label1.set_visible(False)
@@ -393,7 +393,7 @@ for i in range(nFuels):
                 plt.ylabel("Share of Primary Energy:\nFossil Fuels [%]", fontsize=yl_sz)
                 if label_HD == True:
                     annotate('Source: IEA - Key World Energy Statistics 2013', fontsize=hd_sz, xy=(2100, -8), xycoords='data', 
-                             horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+                             ha='right',va='center', annotation_clip=False)
                 
 
         elif "Historical" in nScen[j] and len(aMkt[i]) > 1:
@@ -442,10 +442,10 @@ for j in range(len(nScen)):
                 demandIdx = k
                 plt.plot(aYear,aMkt[k][j],color='black',linewidth=1,linestyle="--",label=fuelTypes[k], zorder = 100)  
                 ftFuel = str(int(round(aMkt[k][j][-1],0)))+' EJ'
-                #annotate(str(ftFuel), xy=(2110,aMkt[k][j][-1]+10), xycoords='data',fontsize=lf_sz,horizontalalignment='center',color='black')
+                #annotate(str(ftFuel), xy=(2110,aMkt[k][j][-1]+10), xycoords='data',fontsize=lf_sz,ha='center',color='black')
                 if "Alg" in nScen[j] and label_HD == True:
                     annotate('Source: IEA - Key World Energy Statistics 2013', fontsize=hd_sz, xy=(2120, -100), xycoords='data', 
-                             horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+                             ha='right',va='center', annotation_clip=False)
 
             elif "Energy Production" == fuelTypes[k]:
                 supplyIdx = k
@@ -671,16 +671,16 @@ for i in range(len(nScen)):
         #scatter([2100,],[anAG[i][-1],],dots, color=get_color(nScen[i]))
 
         annotate(str(round(float(anEM[i][-1]),1))+r' PgC y$^{-1}$',
-                 xy=(2100, tempY1), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                 xy=(2100, tempY1), xycoords='data',ha='center',va='center',
                  xytext=(3,0), textcoords='offset points', fontsize=lf_sz)
         annotate(str(round(float(gross_AF_AG[-1]),1))+r' PgC y$^{-1}$',
-                 xy=(2100, tempY2), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                 xy=(2100, tempY2), xycoords='data',ha='center',va='center',
                  xytext=(3,0), textcoords='offset points', fontsize=lf_sz)
 
-annotate("Energy Consumption:", xy=(1975,11), xycoords='data',horizontalalignment='center')
-annotate("Carbon Emissions", xy=(1975,9), xycoords='data',horizontalalignment='center')
-annotate("Energy Production:", xy=(1975,-9), xycoords='data',horizontalalignment='center')
-annotate("Carbon Uptake", xy=(1975,-11), xycoords='data',horizontalalignment='center')
+annotate("Energy Consumption:", xy=(1975,11), xycoords='data',ha='center')
+annotate("Carbon Emissions", xy=(1975,9), xycoords='data',ha='center')
+annotate("Energy Production:", xy=(1975,-9), xycoords='data',ha='center')
+annotate("Carbon Uptake", xy=(1975,-11), xycoords='data',ha='center')
 plt.title('Gross Emissions', fontsize=title_sz)
 #plt.xlabel('Year',fontsize=xl_sz)
 plt.ylabel("PgC y"+r'$^{-1}$', fontsize=yl_sz)
@@ -810,7 +810,7 @@ scatter([2100,],[rcp_em_85[-1],],dots, color=get_color("8.5"),zorder=0)
 
 if label_HD == True:
     annotate('Source: Carbon Dioxide Information Analysis Center', fontsize=hd_sz, xy=(2115, -14), xycoords='data', 
-             horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+             ha='right',va='center', annotation_clip=False)
 
 #plt.title('Net Emissions', fontsize=title_sz)
 #plt.xlabel('Year',fontsize=xl_sz)
@@ -1016,7 +1016,7 @@ for i in range(nLUD):
                 if "BAU" in nScen[j] or "Feed" in nScen[j]:
                     tempY = get_y_offset(allYval,aLUD[agro_idx][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(float(aLUD[agro_idx][j][-1]),1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz,weight='bold')
             #plt.title("Global Land Use", fontsize=title_sz)
             plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.2)
@@ -1053,7 +1053,7 @@ for i in range(nLUD):
                 if "BAU" in nScen[j] or "Feed" in nScen[j]:
                     tempY = get_y_offset(secYval,aLUD[tree_idx][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(float(aLUD[tree_idx][j][-1]),1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz,weight='bold')
             plt.ylabel("Forest\n[Bha]", fontsize=yl_sz)
             plt.xlim(1950,2125)
@@ -1090,7 +1090,7 @@ for i in range(nLUD):
                 if "BAU" in nScen[j] or "Alg-Feed" in nScen[j]:
                     tempY = get_y_offset(thrYval,aLUD[othr_idx][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(float(aLUD[othr_idx][j][-1]),1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz,weight='bold')        
             #plt.xlabel('Year',fontsize=xl_sz)
             plt.ylabel("Other Land\n[Bha]", fontsize=yl_sz-1)
@@ -1098,7 +1098,7 @@ for i in range(nLUD):
             plt.ylim(3.0,5.0)
             if nScen[j] == "BAU" and label_HD == True:
                 annotate('Source: FAOSTAT', fontsize=hd_sz, xy=(2125, 3.1), xycoords='data', 
-                         horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+                         ha='right',va='center', annotation_clip=False)
             plt.grid(True)
             #ax = plt.gca()
             #leg = ax.legend(loc='best', ncol=2)
@@ -1134,7 +1134,7 @@ for i in range(nLUD):
                 if "Alg-Feed" == nScen[j] or "BAU" == nScen[j]: # HACK: Overlaps with other scenarios in this plot
                     tempY = get_y_offset(secYval,aLUD[i][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(aLUD[i][j][-1],1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz ,weight='bold')   
 
             plt.xlim(1950,2125)
@@ -1172,7 +1172,7 @@ for i in range(nLUD):
                 if "Alg-Feed" == nScen[j] or "BAU" == nScen[j]: # HACK: Overlaps with other scenarios in this plot
                     tempY = get_y_offset(allYval,aLUD[VF_idx][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(float(aLUD[VF_idx][j][-1]),1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz,weight='bold')    
 
             plt.xlim(1950,2125)
@@ -1207,7 +1207,7 @@ for i in range(nLUD):
                 if "Alg-Feed" == nScen[j] or "BAU" == nScen[j]: # HACK: Overlaps with other scenarios in this plot
                     tempY = get_y_offset(allYval,aLUD[copp_idx][j][-1],plt.gca().get_ylim()[1]/40)
                     annotate(str(round(float(aLUD[copp_idx][j][-1]),1))+" Bha",
-                             xy=(2112.5, tempY), xycoords='data',horizontalalignment='center',verticalalignment='center',
+                             xy=(2112.5, tempY), xycoords='data',ha='center',va='center',
                              xytext=(0,0), textcoords='offset points', fontsize=lf_sz, weight='bold')      
                     
             plt.xlim(1950,2125)
@@ -1218,7 +1218,7 @@ for i in range(nLUD):
 
             if nScen[j] == "BAU" and label_HD == True:
                 annotate('Source: FAOSTAT', fontsize=hd_sz, xy=(2125, 0.8), xycoords='data', 
-                         horizontalalignment='right',verticalalignment='center', annotation_clip=False)   
+                         ha='right',va='center', annotation_clip=False)   
 
         if "GLOBIOM Vegetal Food Yield" == LUDtypes[i]:
             if j == 0: # be careful with this; it is easily broken. need to find better way to get lowest j ( min(j) = first scenario plotted )
@@ -1236,7 +1236,7 @@ for i in range(nLUD):
                     if vfs_idx != -1 and dmd_idx != -1 and (population_time_data[datai]+2.5) % 20 == 0 and (population_time_data[datai]+2.5) > 1951:
                         annotate(str(float(round(population_data[datai],1))),
                                  xy=((population_time_data[datai]+2.5), (population_data[datai]+0.3)), 
-                                 xycoords='data',horizontalalignment='center',verticalalignment='center',
+                                 xycoords='data',ha='center',va='center',
                                  xytext=(0,0.1), textcoords='offset points', fontsize=lf_sz)
                 #        annotate(str(int(dmd_pcap[datai])), 
                 #                 xy=((population_time_data[datai]+2.5), (population_data[datai]+0.3)), 
@@ -1472,7 +1472,7 @@ for i in range(nEM):
                         plt.ylim(0,12)
                         if label_HD == True:
                             annotate('Source: Carbon Dioxide Information Analysis Center', fontsize=hd_sz, xy=(2125, -3.5), xycoords='data', 
-                                     horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+                                     ha='right',va='center', annotation_clip=False)
 
                 if "C Emission from Biomass Energy" in EMtypes[i]:
                     plt.ylabel("Gross C Emissions:\nBiofuels [PgC y"+r'$^{-1}$]', fontsize=yl_sz)
@@ -1521,7 +1521,7 @@ for i in range(nEM):
                 
                 if "BAU" in nScen[j] and label_HD == True:
                     annotate('Source: Carbon Dioxide Information Analysis Center', fontsize=hd_sz, xy=(2112.5, 120), xycoords='data', 
-                             horizontalalignment='right',verticalalignment='center', annotation_clip=False)
+                             ha='right',va='center', annotation_clip=False)
                 plt.ylim(200,900)
             else:
                 plt.ylabel(EMtypes[i], fontsize=yl_sz)
