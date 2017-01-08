@@ -1,3 +1,5 @@
+# This file contains info from the IIASA RCP database, and is intended to compare to Felix model calibration and results. 
+
 #EDGAR Emissions Data
 #Reference: Olivier, J.G.J., Janssens-Maenhout, G., Muntean, M. Peters, J.H.A.W., Trends in global CO2 emissions - 2014 report, JRC report 93171 / PBL report 1490; ISBN 978-94-91506-87-1, December 2014 
 edgar_em_year = [  1990,  1995,   2000,   2005,   2010,   2011,   2012,    2013]
