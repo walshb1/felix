@@ -101,19 +101,26 @@ for file_idx, aFile in enumerate(files_to_compile):
                         title_holder = "C in Storage"
                         row[0] = "C in Storage"
 
+                    # For first file, append title_holder to FXhandles array and set its FXdict correspondent to its index in this array 
                     if file_idx == 0:
                                            
                         FXhandles.append(title_holder)
                         FXdict[title_holder] = len(FXhandles)-1
                         
+                        # This is where all the work is done--fragments is a 2D array
+                        # - accepts the index value corresponding to each title_holder as an argument
+                        # - stores all the values [1900-2100] associated with each scenario
                         fragments[FXdict[title_holder]].append(row)
                     else: continue
 
+                # Don't record historical data until the last file//because it appears in every file
                 elif "HistoricalData" in row[0] and file_idx != len(files_to_compile)-1:
                     continue
 
+                # Catch all the files that aren't the first or the last
                 else: fragments[FXdict[title_holder]].append(row)
  
+# Open new file to write out compiled data
 compiled_file = open(in_file_name[:-1]+".csv", 'w')
 
 for row in header_array:
