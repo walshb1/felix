@@ -1,8 +1,13 @@
+# This file is used to control and standardize the aesthetics of FeliX model plots 
+
 import brewer2mpl
 import seaborn as sns
 
+# timeit lets you figure out how long it takes scripts to run, in order to optimize
 import timeit
 
+# this is how you call color palettes from brewer2mpl
+# - all palettes are shown at http://bl.ocks.org/mbostock/5577023
 set1 = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
 set2 = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 dark2 = brewer2mpl.get_map('Dark2', 'qualitative', 8).mpl_colors
@@ -31,6 +36,7 @@ sns_rgp = sns.color_palette("RdYlGn", 11)
 
 #################
 
+# Set color schema (by scenario) for COP paper
 def cop_color(iCol):   
     if "Historical" in iCol: return greys[6]
     #
@@ -75,9 +81,11 @@ def cop_color(iCol):
 
     return pairs[1]
 
+# start timer. put this function at the beginning of the code you want to time
 def set_timer():
     return timeit.default_timer()
 
+# stop timer. put this a tthe end of the script you want to time, with start_time as the argument
 def stop_timer(start_time=0):
     run_time = round(timeit.default_timer()-start_time,1) #elapsed time in seconds
     if run_time <= 60:
@@ -85,6 +93,7 @@ def stop_timer(start_time=0):
     else:
         print "Run Time = ",int(run_time/60),"min",int(run_time%60),"sec"
 
+# Set standard linewidth for various plots
 def get_linewidth(scenario_name=""):
     if "Historical" in scenario_name: return 2.0
     elif "noRange" in scenario_name: return 2.0
@@ -92,6 +101,8 @@ def get_linewidth(scenario_name=""):
     elif "BAU" in scenario_name: return 1.5
     return 1.5
 
+# Use this to quickly tell the script whether or not to plot a given scenario.
+# - if you generate a new scenario and it's not explicitly listed here, it won't get plotted
 def scenario_switch(scenario_name,plot_set="",print_hidden_scen=False):
     
     if plot_set == "Char":
@@ -155,7 +166,8 @@ def scenario_switch(scenario_name,plot_set="",print_hidden_scen=False):
     return False
 
 #################
-
+# This function is for avoiding overlapping labels when you want to label the final (2100) value of a scenario in a plot
+# - doesn't work that well
 def get_y_offset(val_history, new_y_val, min_offset):
 
     return new_y_val
@@ -175,7 +187,7 @@ def get_y_offset(val_history, new_y_val, min_offset):
     return tempY
 
 #################
-
+# Another version of above
 def new_y_offset(in_vals, min_offset=0, group_offset=0):
     # Works if you start from the top and print down:
     total_fuels = len(in_vals)-1
@@ -192,7 +204,7 @@ def new_y_offset(in_vals, min_offset=0, group_offset=0):
         total_fuels = total_fuels-1
     
 ##################
-
+# Function that standardizes scenario names.
 def standardize_scenario_names(list_scenarios,var=""):
 
     if var=="char":
@@ -226,7 +238,7 @@ def standardize_scenario_names(list_scenarios,var=""):
             elif "Algae" in list_scenarios[iName]: list_scenarios[iName] = list_scenarios[iName].replace("Algae","Alg-Fuel")
         
 ###################
-
+# Set colors for BioChar paper
 def char_colors(iCol):
     if iCol == "FossilBAU 3C": return sns_s1[0]
     if iCol == "BAU 3C": return sns_s1[1]
@@ -242,6 +254,7 @@ def char_colors(iCol):
         print "\nNo color assigned to",iCol
         return browns[2]
 
+# Set colors for algae paper
 def get_color(iCol):
 
     if iCol == "animal_dmd": return browns[2]
@@ -340,6 +353,7 @@ def get_color(iCol):
     #
     return pairs[0]
 
+# Set colors for population plot
 def get_population_coloring(pCol = 0.0):
     
     if pCol >= 1.50: return sns_rgp[0]
