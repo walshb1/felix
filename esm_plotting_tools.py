@@ -1,4 +1,4 @@
-# This file is used to control and standardize the aesthetics of FeliX model plots 
+# This file defines functions that can be used to control and standardize the aesthetics of FeliX model plots 
 
 import brewer2mpl
 import seaborn as sns
