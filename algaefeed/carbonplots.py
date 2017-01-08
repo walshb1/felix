@@ -1,3 +1,4 @@
+# Set up environment & import pyplot packages
 from pylab import *
 import csv
 import prettyplotlib as ppl
@@ -7,6 +8,7 @@ from matplotlib import colors
 from textwrap import wrap
 rc('text', usetex=False)
 
+# Set default parameters for drawn output (plots)
 params = {'savefig.bbox': 'tight', #or 'standard'
           #'savefig.pad_inches': 0.1 
           'xtick.labelsize': 10,
@@ -19,6 +21,7 @@ params = {'savefig.bbox': 'tight', #or 'standard'
           }
 plt.rcParams.update(params)
 
+# These lines tell the compiler where to look for esm_plotting_tools.py, then load it
 import sys
 sys.path.insert(0, '/Users/brian/Desktop/Dropbox/python/my_libraries')
 
@@ -26,6 +29,7 @@ import esm_plotting_tools
 reload(esm_plotting_tools)
 from esm_plotting_tools import *
 
+# The sns package controls aesthetics of output
 sns.set()
 sns.set_context("paper")
 sns.set_style("whitegrid")
@@ -33,7 +37,7 @@ sns.set_style("whitegrid")
 
 #############################################
 # Conversion Factors
-mtoe_to_ej = .041868
+mtoe_to_ej = .041868 # much of Felix output is in megatons oil equivalent (mtoe)
 #mtoe_to_ej = 1.00000
 
 #############################################
@@ -51,7 +55,7 @@ sec_alpha = 0.20 # Transparency of secondary error ranges
 ep_alpha = 0.85  # Transparency of Energy Profile panels
 
 #############################################
-# "Show" Switches
+# "Show" Switches - set these to true to show the plots as they're being generated
 show_temp          = False
 show_production    = False
 show_energyprofile = False
@@ -65,6 +69,7 @@ label_HD = False
 #############################################
 #############################################
 # RCP Info
+# - these arrays have RCP info from the IIASA database (http://tntcat.iiasa.ac.at/RcpDb/)
 
 labels_rcps = [["RCP 2.6","RCP 4.5","RCP 6.0","RCP 8.5"],
                ["RCP 2.6","RCP 4.5","RCP 6.0","RCP 8.5"],
@@ -96,7 +101,8 @@ rcp_temp_60 = [ 2.0, 2.8, 3.7 ]
 rcp_temp_85 = [ 3.2, 4.3, 5.4 ] 
 
 #############################################
-# GLOBIOM Land Yield Projections
+# GLOBIOM Agricultural Yield Projections
+# - these are from [Herrero et al. "African livestock futures", 2014]
 glo_yld = [ [  8.31,  8.56,  8.81 ], #2000
             [  9.59,  9.84,  9.99 ], #2010
             [ 10.97, 11.27, 11.47 ], #2020
@@ -109,9 +115,12 @@ glo_yld = [ [  8.31,  8.56,  8.81 ], #2000
             [ 15.19, 17.90, 19.20 ], #2090
             [ 15.69, 18.53, 20.00 ] ]#2100
 
+# End of preamble - start plotting
+
 #############################################
 # Temperature relative to preindustrial
 
+# Declare global variables
 ct1 = 0
 ct2 = 0
 nScen_temp = []
@@ -121,9 +130,12 @@ aHyr2 = []
 aTemp_giss = [[]]
 aTemp_had = [[]]
 
+# open .csv file
+# - if there's a problem, try changing the next line to "with open("table_new/temp_table.csv", 'rU') as f:"
 with open("table_new/temp_table.csv") as f: 
     reader = csv.reader(f)
     for row in reader:
+#we are now running through reader, line by line. would be good to make sure you know what the input files look like at this point.
 
 ##### TIME INFO
         if ct1 == 0:
