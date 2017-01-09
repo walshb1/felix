@@ -135,23 +135,25 @@ aTemp_had = [[]]
 with open("table_new/temp_table.csv") as f: 
     reader = csv.reader(f)
     for row in reader:
-#we are now running through reader, line by line. would be good to make sure you know what the input files look like at this point.
+# code is now running through reader, line by line. would be good to make sure you know what the input files look like at this point.
 
-##### TIME INFO
+##### Get TIME info
         if ct1 == 0:
             for i in range(1,len(row)-1):
                 aYear.append(int(float(row[i])))
 
-##### SCENARIO INFO
+##### Get SCENARIO info
         elif ct1 == 1:
             for i in range(1,len(row)-1):
                 if row[i] != "": nScen_temp.append(row[i])
         
+            # later in the code, there's just one poly-dim array for all the info. for now, each handle has its own array
             for n in range(len(nScen_temp)):
                 aTemp_giss.append([])
                 aTemp_had.append([])
     
 ##### 
+        # this handles the number of scenarios dynamically, but in a stupid way--identifies the first line of each new set
         elif ct1 >= 2 and ct1 < 2+len(nScen_temp):
             for i in range(1,len(row)-1):
                 if "--" not in row[i]:
@@ -170,18 +172,20 @@ with open("table_new/temp_table.csv") as f:
         ct1 = ct1+1
 
 #################################
-# Plot Temperature
+# we've collected info, now plot Temperature
         
 ax = plt.gca()
 allYval = []
 tempY = 0
 plt.cla()
 
+# see ESM_plotting_tools.py
 standardize_scenario_names(nScen_temp)
 
 for i in range(len(nScen_temp)):
     y_offset = -15
 
+    # Historical data is always treated separately because it has a unique time series (and sometimes doesn't exist)
     if "Historical" in nScen_temp[i]:
         #nScen_temp[i] = "GISS Data"
         #plt.plot(aHyr1,aTemp_giss[i],color=pairs[0],linewidth=2,label=nScen_temp[i])
@@ -195,6 +199,7 @@ for i in range(len(nScen_temp)):
         else: plt.plot(aYear,aTemp_giss[i],color=get_color(nScen_temp[i]),linewidth=get_linewidth(nScen_temp[i]),label=nScen_temp[i])
         scatter([2100,],[aTemp_giss[i][-1],],dots, color=get_color(nScen_temp[i]))
 
+        # Plot RCP data when we're in the BAU scenario (so it doesn't get plotted multiple times)
         if nScen_temp[i] == "BAU":
             plt.plot(plt.gca().get_xlim(),[0,0], 'k-', lw=0.75)
             scatter([2128,],[rcp_temp_26[1],],dots, color=get_color("2.6"))
@@ -213,6 +218,7 @@ for i in range(len(nScen_temp)):
             
         #########################
         # Temperature error bars
+        # watch out--specific scenario names are hard coded here
         low_err = np.array([])
         high_err = np.array([])
         if nScen_temp[i] == "BAU":
